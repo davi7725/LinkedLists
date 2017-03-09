@@ -32,7 +32,7 @@ namespace LinkedLists
                 pointer = pointer.Next;
             }
 
-            
+
 
             newNode.Next = pointer.Next;
             pointer.Next = newNode;
@@ -120,7 +120,7 @@ namespace LinkedLists
                 {
                     ClubMember a = (ClubMember)pointer.Data;
                     ClubMember b = (ClubMember)pointer.Next.Data;
-                    if (string.Compare(a.Fname,b.Fname) == 1)
+                    if (string.Compare(a.Fname, b.Fname) == 1)
                     {
                         Change(pointer, pointer.Next);
                         swapped = true;
@@ -160,7 +160,45 @@ namespace LinkedLists
             nodeB.Data = tmpData;
         }
 
-        override public string ToString()
+        public bool Contains(object data)
+        {
+            ClubMember cm = (ClubMember)data;
+
+            bool foundTheData = false;
+            Node pointer = Head;
+
+            while (pointer != null)
+            {
+                if (cm.Equals(pointer.Data) == true)
+                {
+                    foundTheData = true;
+                }
+                pointer = pointer.Next;
+            }
+
+            return foundTheData;
+        }
+
+        public int IndexOf(object data)
+        {
+            ClubMember cm = (ClubMember)data;
+            int counter = 0;
+            bool foundTheData = false;
+            Node pointer = Head;
+
+            while (pointer != null && foundTheData == false)
+            {
+                foundTheData = cm.Equals(pointer.Data);
+
+                pointer = pointer.Next;
+                counter++;
+            }
+
+            return counter - 1;
+
+        }
+
+        public override string ToString()
         {
             Node pointer = Head;
             string returnString = "";

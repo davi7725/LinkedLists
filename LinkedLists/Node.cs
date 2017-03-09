@@ -8,6 +8,8 @@ namespace LinkedLists
 {
     class Node
     {
+        public Node Left { get; set; }
+        public Node Right { get; set; }
         public Node Next { get; set; }
         public object Data { get; set; }
     }
