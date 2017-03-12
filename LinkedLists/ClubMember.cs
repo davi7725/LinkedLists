@@ -26,11 +26,15 @@ namespace LinkedLists
             int result = 0;
             ClubMember cm = (ClubMember)o;
 
-            if(cm.Nr > this.Nr)
+
+            //this.Nr = leftchild
+            //cm.Nr = rightchild
+            
+            if(this.Nr < cm.Nr)
             {
                 result = 1;
             }
-            else if(cm.Nr<this.Nr)
+            else if(this.Nr> cm.Nr)
             {
                 result = -1;
             }

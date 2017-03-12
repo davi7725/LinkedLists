@@ -16,7 +16,7 @@ namespace LinkedLists
 
             //TODO: Make arrays and random cm's to be the same for all searches!!!
 
-
+            /*********** LINKED LISTS ***********/
             /*
             MyList myList = new MyList();
             */
@@ -34,10 +34,12 @@ namespace LinkedLists
             Console.WriteLine(myList.ToString());
 
             Console.WriteLine(myList.IndexOf(cm4));*/
-
+            /*********** LINKED LISTS END ***********/
+            /*********** EXSORTANDSEARCH01 ***********/
+            
             int smallSize = 1000;
-            int largeSize = smallSize * 10;
-
+            int largeSize = smallSize * 2;
+            /*
             ClubMember[] smallLinear = new ClubMember[smallSize];
             ClubMember[] largeLinear = new ClubMember[largeSize];
 
@@ -66,9 +68,65 @@ namespace LinkedLists
 
             SearchBst(smallBst, smallCmArr);
             SearchBst(largeBst, largCmArr);
+            /*********** EXSORTANDSEARCH01 END ***********/
 
+            /*********** EXSORTANDSEARCH02 ***********/
+            /*
+            HashADT smallHash = new HashADT(smallSize);
+            HashADT largeHash = new HashADT(largeSize);
+
+            HashAdtFill(smallHash, smallSize);
+            HashAdtFill(largeHash, largeSize);
+
+            SearchHashAdt(smallHash, smallSize);
+            SearchHashAdt(largeHash, largeSize);*/
+            /*********** EXSORTANDSEARCH02 END ***********/
+
+            HeapADT heap = new HeapADT(smallSize);
+
+            heap.Insert(cm1);
+            heap.Insert(cm2);
+            heap.Insert(cm5);
+            heap.Insert(cm2);
+            heap.Insert(cm3);
+            heap.Insert(cm5);
+            heap.Insert(cm4);
+            heap.Insert(cm3);
+            heap.Insert(cm4);
+            heap.Insert(cm5);
+            heap.Insert(cm3);
+            heap.Insert(cm4);
+            heap.Insert(cm5);
+            heap.Insert(cm3);
+            heap.Insert(cm1);
+            heap.Insert(cm5);
+            heap.Insert(cm2);
+
+            heap.showArray();
+
+            IComparable[] sorted = heap.GetSortedArray();
+
+            Console.WriteLine("SORTED ARRAY: ");
+            
+            foreach(IComparable ic in sorted)
+
+            {
+                ClubMember mc = (ClubMember)ic;
+                if (mc != null)
+                    Console.Write(" " + mc.Nr);
+            }
             Console.ReadKey();
 
+        }
+
+        public void HashAdtFill(HashADT hashObj, int size)
+        {
+            int properSize = size + (size / 10);
+            for (int i = 0; i < properSize; i++)
+            {
+                ClubMember cm = CMFactory.GetClubMember();
+                hashObj.Insert(cm);
+            }
         }
 
         public void TreeFill(MyBST bst, int size, ClubMember[] arr)
@@ -86,6 +144,39 @@ namespace LinkedLists
             {
                 cmArray[i] = CMFactory.GetClubMember();
             }
+        }
+
+        public void SearchHashAdt(HashADT hashObj, int size)
+        {
+            Random rnd = new Random();
+            ClubMember cm1 = null;
+            ClubMember cm2 = null;
+            ClubMember cm3 = null;
+
+            while (cm1 == null)
+            {
+               cm1 = (ClubMember)hashObj.GetElement(rnd.Next(0, size - 1));
+            }
+            while (cm2 == null)
+            {
+                cm2 = (ClubMember)hashObj.GetElement(rnd.Next(0, size - 1));
+            }
+            while (cm3 == null)
+            {
+                cm3 = (ClubMember)hashObj.GetElement(rnd.Next(0, size - 1));
+            }
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            for(int i = 0; i<1000; i++)
+            {
+                hashObj.Search(cm1);
+                hashObj.Search(cm2);
+                hashObj.Search(cm3);
+            }
+
+            sw.Stop();
+            Console.WriteLine("HashADT stopwatch(" + size + ") " + sw.Elapsed);
         }
 
         public void SearchBst(MyBST bst, ClubMember[] arr)

@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="ClubMember.cs" />
     <Compile Include="CMFactory.cs" />
+    <Compile Include="HashADT.cs" />
+    <Compile Include="HeapADT.cs" />
     <Compile Include="MyBST.cs" />
     <Compile Include="MyList.cs" />
     <Compile Include="Node.cs" />
